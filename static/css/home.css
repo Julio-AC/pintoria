@@ -1,0 +1,123 @@
+html {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 300;
+	margin: 30px 0;
+	background: #a91c00;
+	position: relative;
+	background-image: url('https://www.wallpaperup.com/uploads/wallpapers/2021/07/06/1406538/1559829acc0f8c5550e3c3e258b76136-1400.jpg');
+	background-size: cover;
+}
+.nav-link {
+	cursor: pointer;
+}
+a {
+    text-decoration: none;
+    color: rgb(29, 0, 0);
+}
+p {
+	font-size: 14px;
+	color: grey;
+	line-height: 1.6em;
+}
+strong {
+	font-weight: bold;
+}
+div.info-container {
+	max-width: 350px;
+	border-radius: 10px;
+	padding: 20px;
+	margin: 0 auto 30px auto;
+	background: rgba(255,255,255,0.9);
+}
+p.info {
+	font-size: 12px;
+}
+p.symbol {
+	margin: 0;
+	font-family: 'Abril Fatface', serif;
+	font-size: 40px;
+	color: #ea8a1c;
+	text-align: center;
+}
+p.element-name {
+	display: inline;
+	margin: 0 70px;
+}
+i.fas.fa-times {
+	color: #20A4F3;
+}
+p.footnote {
+	font-size: 10px;
+}
+div.card {
+	padding: 20px;
+	background: rgba(255, 255, 255, 0.9);
+
+	border-radius: 10px;
+	margin: 0 auto;
+	max-width: 450px;
+	position: relative;
+/* 	box-shadow: 0px 0px 20px 2px #7FB7BE; */
+}
+
+/* Estilo para adaptar el ancho del modal según el contenido */
+.modal {
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-dialog {
+    max-width: 90%;
+}
+
+.modal-content {
+    width: 100%;
+}
+
+/* Opcional: ajusta los márgenes del modal-body según tus necesidades */
+.modal-body {
+    margin: 15px;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa; /* Color de fondo */
+    color: #343a40; /* Color del texto */
+}
+
+.container {
+    max-width: 800px; /* Ancho máximo del container */
+    margin: 20px auto; /* Centrar el container en la página */
+    background-color: #fff; /* Color de fondo del container */
+    padding: 20px; /* Espaciado interno del container */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.container > * {
+    border-radius: 8px; /* Ajusta el radio de borde según tus preferencias */
+    padding: 10px; /* Ajusta el valor de padding según tus necesidades */
+}
+
+h1, h3 {
+    color: #007bff; /* Color del encabezado */
+}
+
+lead {
+    font-size: 1.25rem; /* Tamaño del texto de plomo */
+}
+
+.row {
+    margin-bottom: 20px; /* Espaciado entre filas */
+}
+
+.col-4 {
+    padding: 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    text-align: center; /* Centra el texto horizontalmente */
+}
