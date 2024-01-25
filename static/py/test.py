@@ -1,8 +1,10 @@
 #use open ai
-
+import streamlit as st
+import os
 import openai
 
-openai.api_key = "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"
+#openai.api_key = "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"
+openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 def chatgpt(prompt):
     response = openai.Completion.create(
