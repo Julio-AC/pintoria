@@ -1,55 +1,70 @@
-import streamlit as st
+from flask import Flask, render_template, request
 from openai import OpenAI
 import json
-import os
 from static.py.cambiar_colores import generar_html
+app = Flask(__name__)
 
-def main():
-    st.title("Generador de Paletas de Colores")
-    key = os.environ.get("OPENAI_API_KEY")
-    # Formulario en Streamlit
-    descripcion = st.text_input("Ingrese la descripción:")
+@app.route('/')
+def index():
+    # Diccionario con ejemplos de colores primarios
+    colores = {
+        'col1-1': {'nombre': 'azul', 'hexadecimal': '#0000FF'},
+        'col1-2': {'nombre': 'rojo', 'hexadecimal': '#FF0000'},
+        'col1-3': {'nombre': 'verde', 'hexadecimal': '#00FF00'},
+        'col2-1': {'nombre': 'amarillo', 'hexadecimal': '#FFFF00'},
+        'col2-2': {'nombre': 'naranja', 'hexadecimal': '#FFA500'},
+        'col2-3': {'nombre': 'morado', 'hexadecimal': '#800080'},
+        'col3-1': {'nombre': 'rosa', 'hexadecimal': '#FFC0CB'},
+        'col3-2': {'nombre': 'celeste', 'hexadecimal': '#00FFFF'},
+        'col3-3': {'nombre': 'marrón', 'hexadecimal': '#A52A2A'},
+        'col4-1': {'nombre': 'gris', 'hexadecimal': '#808080'},
+        'col4-2': {'nombre': 'blanco', 'hexadecimal': '#FFFFFF'},
+        'col4-3': {'nombre': 'negro', 'hexadecimal': '#000000'},
+        'col5-1': {'nombre': 'dorado', 'hexadecimal': '#FFD700'},
+        'col5-2': {'nombre': 'plateado', 'hexadecimal': '#C0C0C0'},
+        'col5-3': {'nombre': 'verde oscuro', 'hexadecimal': '#006400'},
+        'col6-1': {'nombre': 'azul marino', 'hexadecimal': '#000080'},
+        'col6-2': {'nombre': 'rojo oscuro', 'hexadecimal': '#8B0000'},
+        'col6-3': {'nombre': 'verde oliva', 'hexadecimal': '#808000'}
+    }
+    html_generado = generar_html(colores)
+    return render_template('pintoria.html', html_generado=html_generado)
+
+@app.route('/', methods=['POST'])
+def procesar_formulario():
+    descripcion = request.form['descripcion']
+    opcion_seleccionada = request.form['opcion']
+
+    # Lógica para conectarte a OpenAI y obtener una respuesta
+    client = OpenAI(api_key="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")
+    prompt = f"Como parte de la creación de una plataforma de diseño web, necesito asistencia para identificar los esquemas de colores ideales para diferentes elementos de la interfaz relacionados con un concepto. Por favor, genera una paleta de colores correspondiente al siguiente tema clave y descripción de una página web, descripción: {descripcion}, tema clave: {opcion_seleccionada}. Los colores solicitados deben adaptarse a elementos como botones, barras de navegación, tarjetas, pie de página, colores de texto y fondo, entre otros componentes relevantes para una estética armoniosa y atractiva. Se requieren los mejores 22 colores, presentados en un diccionario donde la clave sea desde 'col1-1' hasta 'col6-3' habiendo 3 de cada co y el valor sea un diccionario con el 'nombre' correspondiente del color y su valor 'hexadecimal'. Esto contribuirá significativamente a mejorar la experiencia visual de los usuarios en estas páginas web y promoverá la coherencia en el diseño."
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user", "content": prompt}
+        ],
+    )
+    print(completion)
     
-    opciones_colores = [
-        "Tienda en línea", "Blog Personal", "Portfolio en línea", "Sitio web de Restaurante",
-        "Blog de Viajes", "Página de Negocio Local", "Sitio web Educativo", "Sitio Inmobiliario",
-        "Portal de Noticias", "Sitio web Musical", "Sitio de Salud y Bienestar", "Blog de Tecnología",
-        "Sitio de Gestión de Eventos", "Sitio de Moda", "Plataforma Comunitaria", "Portal Deportivo",
-        "Sitio de Arte y Cultura", "Página de Aterrizaje (Landing Page)", "Red Social", "Galería de Fotos en línea"
-    ]
+    # Obtén el texto generado por OpenAI
+    texto_generado = completion.choices[0].message.content
+    print(texto_generado)
 
-    opcion_seleccionada = st.selectbox("Seleccione la opción:", opciones_colores)
+    # Procesa la cadena JSON correctamente
+    inicio_json = texto_generado.find("{")
+    fin_json = texto_generado.rfind("}") + 1
+    texto_json = texto_generado[inicio_json:fin_json]
+    texto_json = texto_json.replace("'", '"').replace("None", "null").replace("True", "true").replace("False", "false").replace("},}","}}")
 
-    if st.button("Generar Paleta de Colores"):
-        # Lógica para conectarte a OpenAI y obtener una respuesta
-        client = OpenAI(api_key=key)
-        prompt = f"Como parte de la creación de una plataforma de diseño web, necesito asistencia para identificar los esquemas de colores ideales para diferentes elementos de la interfaz relacionados con un concepto. Por favor, genera una paleta de colores correspondiente al siguiente tema clave y descripción de una página web, descripción: {descripcion}, tema clave: {opcion_seleccionada}. Los colores solicitados deben adaptarse a elementos como botones, barras de navegación, tarjetas, pie de página, colores de texto y fondo, entre otros componentes relevantes para una estética armoniosa y atractiva. Se requieren los mejores 22 colores, presentados en un diccionario donde la clave sea desde 'col1-1' hasta 'col6-3' habiendo 3 de cada co y el valor sea un diccionario con el 'nombre' correspondiente del color y su valor 'hexadecimal'. Esto contribuirá significativamente a mejorar la experiencia visual de los usuarios en estas páginas web y promoverá la coherencia en el diseño."
-        
-        completion = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "user", "content": prompt}
-            ],
-        )
+    # Imprimir el contenido del JSON limpio
+    print(texto_json)
 
-        # Obtén el texto generado por OpenAI
-        texto_generado = completion.choices[0].message.content
+    # Puedes utilizar 'texto_json' en tu aplicación, por ejemplo, pasándolo al generador de HTML
+    colores = json.loads(texto_json)
 
-        # Procesa la cadena JSON correctamente
-        inicio_json = texto_generado.find("{")
-        fin_json = texto_generado.rfind("}") + 1
-        texto_json = texto_generado[inicio_json:fin_json]
-        texto_json = texto_json.replace("'", '"').replace("None", "null").replace("True", "true").replace("False", "false").replace("},}","}}")
+    html_generado = generar_html(colores)
+    return render_template('pintoria.html', html_generado=html_generado)
 
-        # Puedes utilizar 'texto_json' en tu aplicación, por ejemplo, pasándolo al generador de HTML
-        colores_generados = json.loads(texto_json)
-        html_generado = generar_html(colores_generados)
-
-        # Mostrar resultado en Streamlit
-        st.write(f"Descripción: {descripcion}")
-        st.write(f"Opción seleccionada: {opcion_seleccionada}")
-        st.write("HTML Generado:")
-        st.markdown(html_generado, unsafe_allow_html=True)
 
 if __name__ == '__main__':
-    main()
+    app.run(debug=True)
