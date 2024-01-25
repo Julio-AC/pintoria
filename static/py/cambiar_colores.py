@@ -30,11 +30,15 @@ def generar_html(colores):
 
 
 def es_color_claro(hexadecimal):
+    # Validar que la cadena hexadecimal tiene el formato correcto
+    if not (hexadecimal.startswith('#') and all(c in '0123456789ABCDEFabcdef' for c in hexadecimal[1:])):
+        return False
+
     # Convierte el código hexadecimal a RGB
     r, g, b = int(hexadecimal[1:3], 16), int(hexadecimal[3:5], 16), int(hexadecimal[5:7], 16)
-    
+
     # Calcula el brillo (luminancia) según la fórmula
     brillo = (0.299 * r + 0.587 * g + 0.114 * b) / 255
-    
+
     # Si el brillo es mayor que 0.5, consideramos que el color es claro
     return brillo > 0.5

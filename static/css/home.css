@@ -8,9 +8,10 @@ body {
 	margin: 30px 0;
 	background: #a91c00;
 	position: relative;
-	background-image: url('https://www.wallpaperup.com/uploads/wallpapers/2021/07/06/1406538/1559829acc0f8c5550e3c3e258b76136-1400.jpg');
+	background-image: url('https://images4.alphacoders.com/960/960915.jpg');
 	background-size: cover;
 }
+
 .nav-link {
 	cursor: pointer;
 }
