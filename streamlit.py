@@ -36,15 +36,6 @@ def main():
         st.write("5. **Resultado:**")
         st.write("- Después de hacer clic en el botón, la aplicación te presentará el resultado. Verás la descripción que ingresaste, la opción de tipo de web seleccionada y, lo más crucial, la paleta de colores generada. Los colores se presentan en un formato visualmente atractivo para que puedas visualizar cómo se integrarían en tu página web.")
 
-        # Barra de Navegación - Cómo Utilizar la Aplicación
-        st.write("6. **Barra de Navegación - Cómo Utilizar la Aplicación:**")
-        st.write("- Si buscas obtener más información sobre el funcionamiento de la aplicación, dirígete a la barra de navegación situada en la esquina superior izquierda de la pantalla. Aquí, encontrarás dos opciones: 'Cómo utilizar la aplicación' y 'Quién es el creador'. Puedes explorar estas opciones para obtener más detalles sobre la aplicación y su operatividad.")
-
-        # Barra de Navegación - Quién es el Creador
-        st.write("7. **Barra de Navegación - Quién es el Creador:**")
-        st.write("- Dentro de la barra de navegación, también existe la opción de conocer más acerca de 'Quién es el creador'. Haz clic en esta opción para obtener información sobre la persona responsable de la creación de la aplicación y el propósito que la impulsó.")
-
-        # Agrega aquí la información sobre cómo utilizar la aplicación
     else:
         # Formulario en Streamlit
         descripcion = st.text_input("Ingrese la descripción:")
