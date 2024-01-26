@@ -3,6 +3,8 @@ from openai import OpenAI
 import json
 from static.py.cambiar_colores import generar_html
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 def main():
     st.title("Generador de Paletas de Colores")
