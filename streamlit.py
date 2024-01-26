@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def main():
-    st.title("Generador de Paletas de Colores")
+    st.title("PINTORIA")
 
     # Barra de navegación
     st.sidebar.title("Navegación")
