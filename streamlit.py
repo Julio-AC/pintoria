@@ -59,7 +59,10 @@ def main():
 
         if st.button("Generar Paleta de Colores"):
             # Lógica para conectarte a OpenAI y obtener una respuesta
-            openai_api_key = os.environ.get("OPENAI_KEY")
+            openai_api_key = os.environ.get("OPENAI_API_KEY")
+            if openai_api_key is None:
+                st.error("Error: La clave API de OpenAI no está configurada. Configúrala usando la variable de entorno OPENAI_API_KEY.")
+                return
             client = OpenAI(api_key=openai_api_key)
             prompt = f"Como parte de la creación de una plataforma de diseño web, necesito asistencia para identificar los esquemas de colores ideales para diferentes elementos de la interfaz relacionados con un concepto. Por favor, genera una paleta de colores correspondiente al siguiente tema clave y descripción de una página web, descripción: {descripcion}, tema clave: {opcion_seleccionada}. Los colores solicitados deben adaptarse a elementos como botones, barras de navegación, tarjetas, pie de página, colores de texto y fondo, entre otros componentes relevantes para una estética armoniosa y atractiva. Se requieren los mejores 22 colores, presentados en un diccionario donde la clave sea desde 'col1-1' hasta 'col6-3' habiendo 3 de cada co y el valor sea un diccionario con el 'nombre' correspondiente del color y su valor 'hexadecimal'. Esto contribuirá significativamente a mejorar la experiencia visual de los usuarios en estas páginas web y promoverá la coherencia en el diseño."
             
