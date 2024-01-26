@@ -9,7 +9,7 @@ def generar_html(colores):
             nombre_color = color_info['nombre']
             hexadecimal = color_info['hexadecimal']
             color_texto = '#000' if es_color_claro(hexadecimal) else '#fff'
-            html += f'\t\t<div class="col-4" id="{col_id}" style="background-color:{hexadecimal}; color:{color_texto};">{nombre_color}</div>\n'
+            html += f'\t\t<div class="col-4" id="{col_id}" style="background-color:{hexadecimal}; color:{color_texto};">{nombre_color}  {hexadecimal}</div>\n'
         html += '\t</div>\n'
 
     html += '\t<h3>Extras</h3>\n'
@@ -21,7 +21,7 @@ def generar_html(colores):
         nombre_color = color_info['nombre']
         hexadecimal = color_info['hexadecimal']
         color_texto = '#000' if es_color_claro(hexadecimal) else '#fff'
-        html += f'\t\t<div class="col-4" id="{col_id}" style="background-color:{hexadecimal}; color:{color_texto};">{nombre_color}</div>\n'
+        html += f'\t\t<div class="col-4" id="{col_id}" style="background-color:{hexadecimal}; color:{color_texto};">{nombre_color}  {hexadecimal}</div>\n'
 
     html += '\t</div>\n'
     html += '</div>'

@@ -36,7 +36,7 @@ def procesar_formulario():
     opcion_seleccionada = request.form['opcion']
 
     # Lógica para conectarte a OpenAI y obtener una respuesta
-    client = OpenAI(api_key="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")
+    client = OpenAI(api_key="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")
     prompt = f"Como parte de la creación de una plataforma de diseño web, necesito asistencia para identificar los esquemas de colores ideales para diferentes elementos de la interfaz relacionados con un concepto. Por favor, genera una paleta de colores correspondiente al siguiente tema clave y descripción de una página web, descripción: {descripcion}, tema clave: {opcion_seleccionada}. Los colores solicitados deben adaptarse a elementos como botones, barras de navegación, tarjetas, pie de página, colores de texto y fondo, entre otros componentes relevantes para una estética armoniosa y atractiva. Se requieren los mejores 22 colores, presentados en un diccionario donde la clave sea desde 'col1-1' hasta 'col6-3' habiendo 3 de cada co y el valor sea un diccionario con el 'nombre' correspondiente del color y su valor 'hexadecimal'. Esto contribuirá significativamente a mejorar la experiencia visual de los usuarios en estas páginas web y promoverá la coherencia en el diseño."
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
